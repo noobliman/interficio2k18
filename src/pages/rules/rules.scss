@@ -1,0 +1,25 @@
+page-rules {
+/*
+    Landed by Yasin Burak KALKAN
+    Yasin Burak Kalkan | Front-End Developer
+    www.yasinkalkan.com
+*/
+
+@charset "UTF-8";
+
+/* ______________________________ GENERAL-SETTINGS ______________________________ */
+
+*{margin: 0px; padding: 0px;}
+
+body {
+	background-image: url("http://hdqwalls.com/wallpapers/4k-god-of-war-4-51.jpg");
+   background-size: cover;
+}
+
+#snow-animation-container {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+}

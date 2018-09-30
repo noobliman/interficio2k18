@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Eater');
+
+page-home {
+	font-family: Eater;
+	.background{
+	background: url(https://wallpaper-house.com/data/out/10/wallpaper2you_424844.jpg) no-repeat fixed center;
+	background-size:cover;
+	
+	}
+	.login{
+	color:white;
+
+	text-align: center;
+	background: rgba(13,13,13,0.5);
+	border-radius: 10px;
+	}
+	.item{
+	
+	background: rgba(13,13,13,0.6);
+	border-radius: 5px;
+	}
+	ion-input{
+	color:white;
+	border-bottom: white solid 2px;
+	}
+
+	h1{
+	text-align:center;
+	font-size:300%;
+	font-family:Eater;
+	}
+	#log-intext{
+	color:white;
+	}
+	
+}
