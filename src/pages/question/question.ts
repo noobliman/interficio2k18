@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams ,ModalController} from 'ionic-angular';
+import {LoginPage} from '../login/login';
 /**
  * Generated class for the QuestionPage page.
  *
@@ -15,11 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class QuestionPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,  public modalCtrl : ModalController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuestionPage');
   }
-
+  
 }
