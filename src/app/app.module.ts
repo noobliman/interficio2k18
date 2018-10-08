@@ -8,8 +8,10 @@ import { ListPage } from '../pages/list/list';
 import {RulesPage} from '../pages/rules/rules';
 import {LoginPage} from '../pages/login/login';
 import {LeaderboardPage} from '../pages/leaderboard/leaderboard';
-
+import {RegisterPage} from '../pages/register/register';
+import {MapComponent} from '../components/map/map';
 import  {QuestionPage} from '../pages/question/question';
+import {ComponentsModule} from '../components/components.module'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -21,11 +23,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RulesPage,
     QuestionPage,
     LoginPage,
-    LeaderboardPage
+    LeaderboardPage,
+    RegisterPage,
+    MapComponent
+    
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -35,7 +40,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     RulesPage,
     QuestionPage,
     LoginPage,
-    LeaderboardPage
+    LeaderboardPage,
+    RegisterPage,
+    
   ],
   providers: [
     StatusBar,

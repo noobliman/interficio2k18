@@ -11,11 +11,14 @@
   <div id='snow1'></div>
 <div id='snow2'></div>
 <div id='snow3'></div>
+`<div class="center" *ngIf="bool==false">
   <h1> <span class="main-text skew">INTERFICIO
     <span class="back-text glitch">INTERFICIO</span>
   </span></h1>
  
-  <ion-card class="login">
+  <button ion-button  color="danger" round (click)="openLogin()"></button>
+</div>
+  <ion-card class="login" *ngIf = "bool==true" >
   
     <ion-card-header style="color:white">
       LOGIN
@@ -25,27 +28,25 @@
       <ion-list class="input">
        <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" #username></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="Password" ></ion-input>
+        <ion-input type="Password" #password></ion-input>
       </ion-item >
       <ion-item href="#" style="text-align: right">
         <p>Forget Password?<a style="color: black">Get Here</a></p>
       </ion-item>
-      <button ion-button color="dark" block outline><h1 id="log-intext">Login</h1></button>
+      <button ion-button color="dark" (click)="login(username.value,password.value)">Login</button>
    
       </ion-list>
       <b>OR</b>
-       <div> <ion-icon name="logo-facebook" ></ion-icon>
-        
-        <ion-icon name="logo-google" item-right></ion-icon>
-    </div>
+       <div> 
+        <button ion-button color="danger" class="center"  (click)="openRegisterModal()">SignUp</button>
+      </div>
       
     </ion-card-content>
   
   </ion-card>
-
  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>

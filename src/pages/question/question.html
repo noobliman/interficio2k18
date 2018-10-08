@@ -3,11 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Question</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="background">
+<ion-content padding class="background" *ngIf="map1==false">
 	<div id='snow1'></div>
 <div id='snow2'></div>
 <div id='snow3'></div>
@@ -16,7 +16,7 @@
     <span class="back-text glitch">QUESTIONS_name</span>
   </span></h1>
  <div padding class="question">
- 	<p>ahgs dgfh dgfgjh dhf gdhfsd f</p>
+ 	<p>{{username}}</p>
  	<ion-item>
  		<ion-label floating>Answer</ion-label>
  	<ion-input type="text" name=""></ion-input>
@@ -26,7 +26,19 @@
  	<button ion-button class="center">Submit</button>
  </div>
  	</div>
+
 </div>
+</ion-content>
+<ion-content padding *ngIf="map1==true">
+  <div><h1>Map Hint</h1>
+    
+      <p>Hint..</p>
+    
+  </div>
+  <map></map>
+  <footer> 
+    <button ion-button>Submits</button>
+ </footer>
 </ion-content>
 
 
