@@ -156,7 +156,7 @@ export class MapComponent {
  
         return new Promise((resolve, reject) => {
  
-            Geolocation.getCurrentPosition().then((position) => {
+            navigator.geolocation.watchPosition((position) => {
  
                 console.log(position);
  				this.latitude = position.coords.latitude;
@@ -181,6 +181,10 @@ export class MapComponent {
  
                 reject('Could not initialise map');
  
+            },{
+                enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0
             });
  
         });
