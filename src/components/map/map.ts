@@ -27,11 +27,11 @@ export class MapComponent {
     private networkHandler = null;
  
     constructor(private renderer: Renderer2, private element: ElementRef, @Inject(DOCUMENT) private _document){
- 
+     
+        
     }
      ngOnInit(){
- 
-        this.init().then((res) => {
+     this.init().then((res) => {
             console.log("Google Maps ready.")
         }, (err) => {   
             console.log(err);
@@ -140,11 +140,9 @@ export class MapComponent {
             let script = this.renderer.createElement('script');
             script.id = 'googleMaps';
  
-            if(this.apiKey){
+            
                 script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
-            } else {
-                script.src = 'https://maps.googleapis.com/maps/api/js?callback=mapInit';      
-            }
+            
  
             this.renderer.appendChild(this._document.body, script);
  

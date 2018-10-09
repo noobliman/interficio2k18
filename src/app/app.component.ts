@@ -3,13 +3,14 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Events } from 'ionic-angular';
-
-
+//import {CloudModule,CloudSettings} from '@ionic/cloud-angular';
+import {HttpModule} from '@angular/http';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import {RulesPage} from '../pages/rules/rules';
 import {QuestionPage} from '../pages/question/question';
 import {LeaderboardPage} from '../pages/leaderboard/leaderboard';
+
 @Component({
   templateUrl: 'app.html'
 })
