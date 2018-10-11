@@ -1,48 +1,128 @@
 import { HttpClient,HttpHeaders,HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable,of} from 'rxjs';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {catchError,tap,map} from 'rxjs/operators';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/of';
-
+import {Storage} from '@ionic/storage';
 import {User} from '../user.model';
 /*
   Generated class for the RestProvider provider.
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-const httpOptions = {
+var httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
+ class level {
+      level_no: number ; 
+      title : string ;
+      ques: string;
+      map_bool: boolean ;
+    }
+
+
 const apiUrl = "http://localhost:3000";
 @Injectable()
 export class RestProvider {
-	
-  constructor(public http: HttpClient) {
+	level : level ;
+  token : string ;
+  username : string;
+  userdetail : User ;
+  constructor(public http: HttpClient, private storage : Storage) {
     console.log('Hello RestProvider Provider');
   }
- 
-  getUsers() {
-  return new Promise(resolve => {
-    this.http.get(apiUrl+'/users').subscribe(data => {
-      resolve(data);
-    }, err => {
-      console.log(err);
-    });
-  });
-}
-  
-  addUser(data) {
-  return new Promise((resolve, reject) => {
-    this.http.post(apiUrl+'/users', JSON.stringify(data))
-      .subscribe(res => {
-        resolve(res);
-      }, (err) => {
-        reject(err);
-      });
-  });
-}
-  
 
+    addUser (userData : User){
+    return this.http.post(apiUrl+'/users',userData, httpOptions)
+    .subscribe(data=>{
+                  this.storage.set('Data',data);
+                  this.token = data.token; 
+                  this.username = data.user.username;
+                  httpOptions = {
+                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token'+data.token})
+
+                  }
+                  console.log(data);
+              }
+              ,error=>{
+                console.log(error);
+              }
+    )
+
+  }
+   userLogin (username : string , password : string){
+    return this.http.post(apiUrl+'/auth/login',{username,password}, httpOptions)
+    .subscribe(data=>{
+                  this.storage.set('Data',data);
+                  this.token = data.token;
+                  this.username = data.user.username;
+                  httpOptions = {
+                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token'+data.token})
+
+                  }
+                  console.log(data);
+                 }
+              ,error=>{
+                console.log(error);
+              }
+    )
+
+  }
+  getLevel(){
+
+        return this.http.get(apiUrl+'/getlevel',httpOptions)
+    .subscribe(data=>{
+        this.level = data;
+    }
+    ,error=>{
+      console.log(error);
+    }
+    )
+  }
+  submitAns (answer : string , level_no : number){
+    return this.http.post(apiUrl+'/auth/submit/ans',{answer,level_no}, httpOptions)
+    .subscribe(data=>{
+                  if(data == true) {
+                      //next level operations
+                  }
+                  else{
+                    //retry
+                  }
+                  console.log(data);
+              }
+              ,error=>{
+                console.log(error);
+              }
+    )
+
+  }
+  submitLocation(level_no : number ,lat : number ,long :number ){
+      return this.http.post(apiUrl+'/api/submit/location',{level_no,lat,long}, httpOptions)
+    .subscribe(data=>{
+                  if(data == true) {
+                      //next level operations
+                  }
+                  else{
+                    //retry
+                  }
+                  console.log(data);
+              }
+              ,error=>{
+                console.log(error);
+              }
+    )
+
+  }
+  getPlayerDetail(){
+         return this.http.post(apiUrl+'/api/player',httpOptions)
+    .subscribe(data=>{
+                  this.userdetail = data;
+                  console.log(data);
+              }
+              ,error=>{
+                console.log(error);
+              }
+    )
+  }
+  
 }

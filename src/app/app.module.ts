@@ -11,6 +11,7 @@ import {LeaderboardPage} from '../pages/leaderboard/leaderboard';
 import {RegisterPage} from '../pages/register/register';
 import {MapComponent} from '../components/map/map';
 import  {QuestionPage} from '../pages/question/question';
+import {PlayerdetailPage} from '../pages/playerdetail/playerdetail';
 import {ComponentsModule} from '../components/components.module'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,13 +28,14 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     LeaderboardPage,
     RegisterPage,
-    MapComponent
+    MapComponent,
+    PlayerdetailPage
     
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicStorageModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -46,6 +48,7 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     LeaderboardPage,
     RegisterPage,
+    PlayerdetailPage
     
   ],
   providers: [

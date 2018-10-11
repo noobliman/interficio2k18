@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
 import { NavController,ModalController,Events } from 'ionic-angular';
+import {RestProvider} from '../../providers/rest/rest';
 import {RegisterPage} from '../register/register';
 import {MyApp} from '../../app/app.component'
 import {QuestionPage} from '../question/question';
+import {PlayerdetailPage} from '../playerdetail/playerdetail';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,7 +13,7 @@ import {QuestionPage} from '../question/question';
 export class HomePage {
 
 	 bool = false ;
-  constructor(public navCtrl: NavController , public modalCtrl : ModalController,public events : Events) {
+  constructor(public navCtrl: NavController , public modalCtrl : ModalController,public events : Events,public rest : RestProvider) {
 
   }
   openLogin(){
@@ -22,13 +24,12 @@ export class HomePage {
   	modal.present();
   }
   login(username,password){
+    this.rest.userLogin(username,password);
+    if(this.rest.token ! = null)
+    {
     console.log('logged in');
-    this.events.publish('user:loggedin',username);
-    this.navCtrl.setRoot(QuestionPage,{
-      username : username,
-      password : password,
-      //level will be  also  pushed
-    })
-  }
-
+    this.events.publish('user:loggedin',this.rest.username);
+    this.navCtrl.setRoot(PlayerdetailPage);
+          }
+    }
 }

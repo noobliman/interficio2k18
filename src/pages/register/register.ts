@@ -1,7 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,Events} from 'ionic-angular';
 import {Validators,FormBuilder,	FormGroup,FormControl} from '@angular/forms';
 import { UsernameValidator } from '../../validators/username.validator';
+
+import {RestProvider} from '../../providers/rest/rest';
+import {User} from '../../providers/user.model';
+
+import {MyApp} from '../../app/app.component'
+import {QuestionPage} from '../question/question';
+import {PlayerdetailPage} from '../playerdetail/playerdetail';
+import {Storage} from '@ionic/storage';
 
 /**
  * Generated class for the RegisterPage page.
@@ -16,10 +24,11 @@ import { UsernameValidator } from '../../validators/username.validator';
   templateUrl: 'register.html',
 })
 export class RegisterPage {
+  user : User ;
 	private register :  FormGroup;
  	constructor(public navCtrl: NavController, 
   			public navParams: NavParams,
-  			public formbuilder: FormBuilder) {
+  			public formbuilder: FormBuilder, private storage : Storage,public rest : RestProvider,public events : Events) {
 
   	this.register = this.formbuilder.group ({
 
@@ -42,9 +51,16 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
   logForm(){
+
   	console.log('data entered');
   	//take data from here;
-  	this.navCtrl.pop();
+    this.rest.addUser(this.register.value);
+    if(this.rest.token ! = null)
+    {
+    console.log('logged in');
+    this.events.publish('user:loggedin',this.rest.username);
+    this.navCtrl.setRoot(PlayerdetailPage);
+          }
   }
 
 }

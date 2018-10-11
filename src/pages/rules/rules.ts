@@ -18,15 +18,8 @@ export class RulesPage {
   }
 
 ngOnInit(){
-  this.getUsers();
+  
 }
-getUsers() {
-    this.restApi.getUsers()
-    .then(data => {
-      this.users = data;
-      console.log(this.users);
-    });
-  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad RulesPage');
   }
