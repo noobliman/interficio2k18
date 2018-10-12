@@ -21,7 +21,7 @@ var httpOptions = {
     }
 
 
-const apiUrl = "http://localhost:3000";
+const apiUrl = "";
 @Injectable()
 export class RestProvider {
 	level : level ;
@@ -33,7 +33,7 @@ export class RestProvider {
   }
 
     addUser (userData : User){
-    return this.http.post(apiUrl+'/users',userData, httpOptions)
+    return this.http.post(apiUrl+'/api/auth/register',userData, httpOptions)
     .subscribe(data=>{
                   this.storage.set('Data',data);
                   this.token = data.token; 

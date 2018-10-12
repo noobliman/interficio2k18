@@ -14,7 +14,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'playerdetail.html',
 })
 export class PlayerdetailPage {
-
+	pages: Array<{title: string, component: any}>;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

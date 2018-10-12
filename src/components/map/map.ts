@@ -14,8 +14,7 @@ const {Geolocation,Network} = Plugins;
   templateUrl: 'map.html'
 })
 export class MapComponent {
-	f(){
-	console.log("mapload");}
+	
   apiKey='AIzaSyAZ3MvNySn4hWwgJKzz1TsK4Ei7D9kekM8';
   location : any[];
  

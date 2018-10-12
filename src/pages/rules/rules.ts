@@ -23,8 +23,6 @@ ngOnInit(){
   ionViewDidLoad() {
     console.log('ionViewDidLoad RulesPage');
   }
-  goToHome(){
-    this.navCtrl.push(ListPage);
-  }
+  
 
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,Events} from 'ionic-angular';
+import { Component ,Renderer} from '@angular/core';
+import { IonicPage, NavController, NavParams ,Events,ViewController} from 'ionic-angular';
 import {Validators,FormBuilder,	FormGroup,FormControl} from '@angular/forms';
 import { UsernameValidator } from '../../validators/username.validator';
 
@@ -28,9 +28,10 @@ export class RegisterPage {
 	private register :  FormGroup;
  	constructor(public navCtrl: NavController, 
   			public navParams: NavParams,
-  			public formbuilder: FormBuilder, private storage : Storage,public rest : RestProvider,public events : Events) {
+  			public formbuilder: FormBuilder, private storage : Storage,public rest : RestProvider,public events : Events,public renderer: Renderer, public viewCtrl: ViewController) {
+       this.renderer.setElementClass(viewCtrl.pageRef().nativeElement, 'page-register', true);
 
-  	this.register = this.formbuilder.group ({
+       this.register = this.formbuilder.group ({
 
   		password : new FormControl('', Validators.required),
 	

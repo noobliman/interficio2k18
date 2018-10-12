@@ -10,6 +10,7 @@ import {LoginPage} from '../pages/login/login';
 import {LeaderboardPage} from '../pages/leaderboard/leaderboard';
 import {RegisterPage} from '../pages/register/register';
 import {MapComponent} from '../components/map/map';
+import {RegisterComponent} from '../components/register/register';
 import  {QuestionPage} from '../pages/question/question';
 import {PlayerdetailPage} from '../pages/playerdetail/playerdetail';
 import {ComponentsModule} from '../components/components.module'
@@ -29,7 +30,8 @@ import { IonicStorageModule } from '@ionic/storage';
     LeaderboardPage,
     RegisterPage,
     MapComponent,
-    PlayerdetailPage
+    PlayerdetailPage,
+    RegisterComponent
     
   ],
   imports: [

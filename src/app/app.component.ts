@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform ,MenuController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Events } from 'ionic-angular';
@@ -9,7 +9,8 @@ import { ListPage } from '../pages/list/list';
 import {RulesPage} from '../pages/rules/rules';
 import {QuestionPage} from '../pages/question/question';
 import {LeaderboardPage} from '../pages/leaderboard/leaderboard';
-
+import {PlayerdetailPage} from '../pages/playerdetail/playerdetail';
+import {LoginPage} from '../pages/login/login';
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,16 +20,18 @@ export class MyApp {
   rootPage: any = HomePage;
   loggedIn  = false;
   pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public events : Events) {
+  notpages:Array<{title: string, component: any}>;
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public events : Events,public menuCtrl:MenuController) {
     this.initializeApp();
     events.subscribe('user:loggedin',(username)=>{
+      this.openPage({title: 'Player detail', component: PlayerdetailPage});
       console.log(username);
       this.loggedIn= true;
        if(this.loggedIn == true)
     this.pages = [
      
-   
+      {title: 'Player detail', component: PlayerdetailPage},
+      
       {title: 'Instructions', component: RulesPage},
       {title: 'Questions', component: QuestionPage},
       {title: 'Leaderboard', component : LeaderboardPage},
@@ -61,6 +64,7 @@ export class MyApp {
       {title: 'Leaderboard', component : LeaderboardPage},
       
     ];
+    
 
   }
 
