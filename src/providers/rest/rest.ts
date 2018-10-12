@@ -33,7 +33,7 @@ export class RestProvider {
   }
 
     addUser (userData : User){
-    return this.http.post(apiUrl+'/api/auth/register',userData, httpOptions)
+    /**return this.http.post(apiUrl+'/api/auth/register',userData, httpOptions)
     .subscribe(data=>{
                   this.storage.set('Data',data);
                   this.token = data.token; 
@@ -48,10 +48,10 @@ export class RestProvider {
                 console.log(error);
               }
     )
-
+  **/
   }
    userLogin (username : string , password : string){
-    return this.http.post(apiUrl+'/auth/login',{username,password}, httpOptions)
+    /**return this.http.post(apiUrl+'/auth/login',{username,password}, httpOptions)
     .subscribe(data=>{
                   this.storage.set('Data',data);
                   this.token = data.token;
@@ -66,21 +66,21 @@ export class RestProvider {
                 console.log(error);
               }
     )
-
+**/
   }
   getLevel(){
 
-        return this.http.get(apiUrl+'/getlevel',httpOptions)
+  /**      return this.http.get(apiUrl+'/getlevel',httpOptions)
     .subscribe(data=>{
         this.level = data;
     }
     ,error=>{
       console.log(error);
     }
-    )
+    )**/
   }
   submitAns (answer : string , level_no : number){
-    return this.http.post(apiUrl+'/auth/submit/ans',{answer,level_no}, httpOptions)
+  /**  return this.http.post(apiUrl+'/auth/submit/ans',{answer,level_no}, httpOptions)
     .subscribe(data=>{
                   if(data == true) {
                       //next level operations
@@ -94,10 +94,11 @@ export class RestProvider {
                 console.log(error);
               }
     )
+    **/
 
   }
   submitLocation(level_no : number ,lat : number ,long :number ){
-      return this.http.post(apiUrl+'/api/submit/location',{level_no,lat,long}, httpOptions)
+  /**    return this.http.post(apiUrl+'/api/submit/location',{level_no,lat,long}, httpOptions)
     .subscribe(data=>{
                   if(data == true) {
                       //next level operations
@@ -111,10 +112,10 @@ export class RestProvider {
                 console.log(error);
               }
     )
-
+  **/
   }
   getPlayerDetail(){
-         return this.http.post(apiUrl+'/api/player',httpOptions)
+   /**      return this.http.post(apiUrl+'/api/player',httpOptions)
     .subscribe(data=>{
                   this.userdetail = data;
                   console.log(data);
@@ -122,7 +123,7 @@ export class RestProvider {
               ,error=>{
                 console.log(error);
               }
-    )
+    ) **/
   }
   
 }
