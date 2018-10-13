@@ -21,7 +21,7 @@ var httpOptions = {
     }
 
 
-const apiUrl = "";
+const apiUrl = "http://142.93.220.123:8888/";
 @Injectable()
 export class RestProvider {
 	level : level ;
@@ -33,8 +33,10 @@ export class RestProvider {
   }
 
     addUser (userData : User){
-    /**return this.http.post(apiUrl+'/api/auth/register',userData, httpOptions)
-    .subscribe(data=>{
+      console.log('ayush');
+    return this.http.post(apiUrl+'api/auth/register',userData, httpOptions)
+    .subscribe((data:any)=>{
+                    data = data.json();
                   this.storage.set('Data',data);
                   this.token = data.token; 
                   this.username = data.user.username;
@@ -48,11 +50,11 @@ export class RestProvider {
                 console.log(error);
               }
     )
-  **/
+  
   }
    userLogin (username : string , password : string){
-    /**return this.http.post(apiUrl+'/auth/login',{username,password}, httpOptions)
-    .subscribe(data=>{
+    return this.http.post(apiUrl+'api/auth/login',{username,password}, httpOptions)
+    .subscribe((data:any)=>{
                   this.storage.set('Data',data);
                   this.token = data.token;
                   this.username = data.user.username;
@@ -66,7 +68,7 @@ export class RestProvider {
                 console.log(error);
               }
     )
-**/
+
   }
   getLevel(){
 
