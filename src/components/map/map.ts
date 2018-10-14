@@ -24,7 +24,7 @@ export class MapComponent {
     public latitude : any;
     private mapsLoaded: boolean = false;
     private networkHandler = null;
- 
+    public script ;
     constructor(private renderer: Renderer2, private element: ElementRef, @Inject(DOCUMENT) private _document){
      
         
@@ -141,7 +141,7 @@ export class MapComponent {
  
             
                 script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
-            
+            this.script = script;
  
             this.renderer.appendChild(this._document.body, script);
  
@@ -187,6 +187,7 @@ export class MapComponent {
         });
  
     }
+    
  
     
 }

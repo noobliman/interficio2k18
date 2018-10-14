@@ -56,12 +56,8 @@ export class RegisterPage {
   	console.log('data entered');
   	//take data from here;
     this.rest.addUser(this.register.value);
-    if(this.rest.token ! = null)
-    {
-    console.log('logged in');
-    this.events.publish('user:loggedin',this.rest.username);
-    this.navCtrl.setRoot(PlayerdetailPage);
-          }
+    this.navCtrl.pop()
+          
   }
 
 }

@@ -26,13 +26,9 @@ export class LoginPage {
   }
   login(username,password){
     this.rest.userLogin(username,password);
-     
-    if(this.rest.token ! = null)
-    {
-    console.log('logged in');
-    this.events.publish('user:loggedin',this.rest.username);
+     console.log('logged in');
      this.navCtrl.pop();
-         }
+         
     }
 
 }

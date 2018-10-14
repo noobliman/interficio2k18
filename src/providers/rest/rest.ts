@@ -5,6 +5,8 @@ import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {catchError,tap,map} from 'rxjs/operators';
 import {Storage} from '@ionic/storage';
 import {User} from '../user.model';
+import {Events} from 'ionic-angular'
+//import * as global from '../../global';
 /*
   Generated class for the RestProvider provider.
   See https://angular.io/guide/dependency-injection for more info on providers
@@ -27,16 +29,14 @@ export class RestProvider {
 	level : level ;
   token : string ;
   username : string;
-  userdetail : User ;
-  constructor(public http: HttpClient, private storage : Storage) {
+  playerdetail : any;
+  constructor(public http: HttpClient, private storage : Storage,public events : Events) {
     console.log('Hello RestProvider Provider');
   }
 
     addUser (userData : User){
-      console.log('ayush');
-    return this.http.post(apiUrl+'api/auth/register',userData, httpOptions)
+    return this.http.post(apiUrl+'api/auth/register/',userData, httpOptions)
     .subscribe((data:any)=>{
-                    data = data.json();
                   this.storage.set('Data',data);
                   this.token = data.token; 
                   this.username = data.user.username;
@@ -45,6 +45,8 @@ export class RestProvider {
 
                   }
                   console.log(data);
+                  this.events.publish('user:loggedin',data.user.username);
+    
               }
               ,error=>{
                 console.log(error);
@@ -53,16 +55,22 @@ export class RestProvider {
   
   }
    userLogin (username : string , password : string){
-    return this.http.post(apiUrl+'api/auth/login',{username,password}, httpOptions)
+     var content ={
+         username : username,
+         password : password
+     }
+    return this.http.post(apiUrl+'api/auth/login/',content, httpOptions)
     .subscribe((data:any)=>{
                   this.storage.set('Data',data);
                   this.token = data.token;
-                  this.username = data.user.username;
+                  //this.username = data.user.username;
                   httpOptions = {
-                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token'+data.token})
+                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+data.token})
 
                   }
                   console.log(data);
+                  this.events.publish('user:loggedin',data.user.username);
+    
                  }
               ,error=>{
                 console.log(error);
@@ -72,17 +80,18 @@ export class RestProvider {
   }
   getLevel(){
 
-  /**      return this.http.get(apiUrl+'/getlevel',httpOptions)
-    .subscribe(data=>{
+       return this.http.get(apiUrl+'api/getlevel/',httpOptions)
+    .subscribe((data:any)=>{
         this.level = data;
     }
     ,error=>{
       console.log(error);
-    }
-    )**/
+    });
+    
   }
   submitAns (answer : string , level_no : number){
-  /**  return this.http.post(apiUrl+'/auth/submit/ans',{answer,level_no}, httpOptions)
+  
+    return this.http.post(apiUrl+'api/submit/ans/',{answer,level_no}, httpOptions)
     .subscribe(data=>{
                   if(data == true) {
                       //next level operations
@@ -96,11 +105,11 @@ export class RestProvider {
                 console.log(error);
               }
     )
-    **/
+    
 
   }
   submitLocation(level_no : number ,lat : number ,long :number ){
-  /**    return this.http.post(apiUrl+'/api/submit/location',{level_no,lat,long}, httpOptions)
+     return this.http.post(apiUrl+'api/submit/location/',{level_no,lat,long}, httpOptions)
     .subscribe(data=>{
                   if(data == true) {
                       //next level operations
@@ -114,18 +123,11 @@ export class RestProvider {
                 console.log(error);
               }
     )
-  **/
+  
   }
   getPlayerDetail(){
-   /**      return this.http.post(apiUrl+'/api/player',httpOptions)
-    .subscribe(data=>{
-                  this.userdetail = data;
-                  console.log(data);
-              }
-              ,error=>{
-                console.log(error);
-              }
-    ) **/
+      return    this.http.get(apiUrl+'api/player/',httpOptions)
+     
   }
   
 }

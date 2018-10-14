@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,ElementRef } from '@angular/core';
 import { Nav, Platform ,MenuController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,7 +16,9 @@ import {LoginPage} from '../pages/login/login';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
+  @ViewChild('map') mapElement: ElementRef;
+ 
+  map: any;
   rootPage: any = HomePage;
   loggedIn  = false;
   pages: Array<{title: string, component: any}>;
@@ -67,6 +69,8 @@ export class MyApp {
     
 
   }
+  latitude : any ;
+  longitude : any ;
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -75,13 +79,30 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-  }
+
+    navigator.geolocation.watchPosition((position) => {
+ 
+                console.log(position);
+         this.latitude = position.coords.latitude;
+         this.longitude = position.coords.longitude;
+                },(err) => {
+ 
+                console.log('Could not initialise map');
+ 
+            },{
+                enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0
+            });
+ 
+ }
 
   openPage(page) {
+    //events.publish('giveLocation','location');
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if(page.component!=HomePage)
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page.component,{lat : this.latitude,lng : this.longitude});
     else{
       this.events.publish('user:loggedout','logout');
       this.nav.setRoot(page.component);
