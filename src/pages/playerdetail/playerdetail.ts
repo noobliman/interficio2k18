@@ -17,24 +17,39 @@ import {Observable} from 'rxjs';
 })
 export class PlayerdetailPage {
 	pages: Array<{title: string, component: any}>;
- 	player : Observable<any>;
+ 	player : any;
+  loaded = false;
    constructor(public navCtrl: NavController, public navParams: NavParams,public rest : RestProvider) {
-  this.rest.getPlayerDetail()
+ 
+  }
+  ionViewCanEnter() {
+    console.log("in ionViewCanEnter")
+    
+    return new Promise((resolve, reject) => {    
+      this.rest.getPlayerDetail()
   .subscribe((data:any)=>{
                        //global.playerdetail = data;
-                      this.player = data;
+                      this.player = (data);
                   console.log(this.player);
+                  this.loaded=true;
+                  resolve(data);
+
               }
               ,error=>{
                 console.log(error);
+                reject(error);
               }
     );
-    
-  console.log(this.player);
-  }
 
-  ionViewDidLoad() {
+
+
+          });
+  }
+  
+
+   ionViewDidLoad() {
     console.log('ionViewDidLoad PlayerdetailPage');
   }
+  
 
 }

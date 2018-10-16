@@ -18,7 +18,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   @ViewChild('map') mapElement: ElementRef;
  
-  map: any;
+  //map: any;
   rootPage: any = HomePage;
   loggedIn  = false;
   pages: Array<{title: string, component: any}>;
@@ -69,8 +69,8 @@ export class MyApp {
     
 
   }
-  latitude : any ;
-  longitude : any ;
+  //latitude : any ;
+  //longitude : any ;
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -80,21 +80,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
 
-    navigator.geolocation.watchPosition((position) => {
- 
-                console.log(position);
-         this.latitude = position.coords.latitude;
-         this.longitude = position.coords.longitude;
-                },(err) => {
- 
-                console.log('Could not initialise map');
- 
-            },{
-                enableHighAccuracy: true,
-              timeout: 5000,
-              maximumAge: 0
-            });
- 
+    
  }
 
   openPage(page) {
@@ -102,7 +88,7 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if(page.component!=HomePage)
-    this.nav.setRoot(page.component,{lat : this.latitude,lng : this.longitude});
+    this.nav.setRoot(page.component);
     else{
       this.events.publish('user:loggedout','logout');
       this.nav.setRoot(page.component);

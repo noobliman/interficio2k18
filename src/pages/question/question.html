@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar >
-    <button ion-button menuToggle>
+    <button ion-button menuToggle (click)="ngOnDestroy()">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Question</ion-title>
+    <ion-title>{{level.level_no}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,34 +12,41 @@
 <div id='snow2'></div>
 <div id='snow3'></div>
 <div padding class="questions">
-	<h1> <span class="main-text skew">QUESTIONS_name
-    <span class="back-text glitch">QUESTIONS_name</span>
+	<h1> <span class="main-text skew">{{level.title}}
+    <span class="back-text glitch">{{level.title}}</span>
+  
   </span></h1>
  <div padding class="question">
- 	<p>{{username}}</p>
+ 	<p>{{level.ques}}</p>
  	<ion-item>
  		<ion-label floating>Answer</ion-label>
- 	<ion-input type="text" name=""></ion-input>
+ 	<ion-input type="text" #answer name= ""></ion-input>
  	
  	</ion-item>
  	<div >
- 	<button ion-button class="center">Submit</button>
+ 	<button ion-button class="center" (click)="submitAnswer(answer.value)">Submit</button>
  </div>
  	</div>
 
 </div>
 </ion-content>
-<ion-content padding *ngIf="map1==true">
-  <div><h1>Map Hint</h1>
-    
-      <p>Hint..</p>
-    
-  </div>
+
+<ion-content padding class="background" *ngIf="map1==true"><div padding class="questions">
+  <h1> <span class="main-text skew">{{level.title}}
+    <span class="back-text glitch">{{level.title}}</span>
+  
+  </span></h1></div>
+  <div padding class="question">
+  <p>{{level.ques}}</p>
+
+  <button ion-button class="center" (click)="submitLocation()">Submit</button>
+  </div >
+ 
  <div #map id="map"></div>
-  <footer> 
-    <button ion-button>Submits</button>
- </footer>
+  
+ 
 </ion-content>
+
 
 
 

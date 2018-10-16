@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {RestProvider} from '../../providers/rest/rest';
+//import {} from '@swimlane/ngx-datatable';
 /**
  * Generated class for the LeaderboardPage page.
  *
@@ -14,8 +15,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'leaderboard.html',
 })
 export class LeaderboardPage {
+	standings : Array<object> ;
+	loaded =false;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public rest : RestProvider) {
+  this.rest.getLeaderboard()
+  		.subscribe((data:any)=>{
+  		this.standings = data.standings;
+  		this.loaded = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  		console.log(this.standings); 
+  	
+  });
   }
 
   ionViewDidLoad() {

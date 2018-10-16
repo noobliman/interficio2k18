@@ -7,6 +7,7 @@ import {MyApp} from '../../app/app.component';
 import {DOCUMENT} from '@angular/platform-browser';
 import {Plugins} from '@capacitor/core';
 import {MapComponent} from '../../components/map/map'
+import {RestProvider} from '../../providers/rest/rest';
 
 /**
  * Generated class for the QuestionPage page.
@@ -14,7 +15,7 @@ import {MapComponent} from '../../components/map/map'
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var google ;
 @IonicPage()
 @Component({
   selector: 'page-question',
@@ -23,42 +24,102 @@ import {MapComponent} from '../../components/map/map'
 export class QuestionPage {
 lat : any;
 lng : any;
+watchId : any;
 username : string;
-map1=true;
+map1=false;
 pages: Array<{title: string, component: any}>;
  @ViewChild('map') mapElement: ElementRef;
   map: any;
-   constructor(public navCtrl: NavController, public navParams: NavParams,  public modalCtrl : ModalController,public renderer : Renderer2) {
+  marker : any;
+  level : any;
+  loaded = false;
+   constructor(public navCtrl: NavController, public navParams: NavParams,  public modalCtrl : ModalController,public renderer : Renderer2,public rest : RestProvider) {
   	this.username = navParams.get('username');
-    this.lat = navParams.get("lat");
-    this.lng = navParams.get("lng");
+  
   }
-
-  /**testMarker(){
- 
-        let center = this.mapComponent.map.getCenter();
-       // this.mapComponent.addMarker(center.lat(), center.lng());
- 
-    }**/
+  ionViewCanEnter() {
+    console.log("in ionViewCanEnter")
+    
+    return new Promise((resolve, reject) => {    
+ this.rest.getLevel()
+   .subscribe((data:any)=>{
+     this.level=data;
+     this.map1 = data.map_bool;
+     this.loaded = true;
+     resolve(data);
+   },error=>{
+     console.log(error);
+     reject(error);
+   });
+          });
+  }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuestionPage');
-    //this.mapComponent.addMarker(this.mapComponent.latitude,this.mapComponent.longitude);
-    this.initMap()
+       this.initMap()
   }
    initMap() {
-     console.log(this.lat,this.lng);
-    this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 7,
-      center: {lat: this.lat, lng: this.lng}
-    });
-     let marker = new google.maps.Marker({
+     this.watchId =  navigator.geolocation.watchPosition((position) => {
+ 
+                             console.log(position);
+         this.lat = position.coords.latitude;
+         this.lng = position.coords.longitude;
+                let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+ 
+                let mapOptions = {
+                    center: latLng,
+                    zoom: 30
+                };
+                console.log(this.map1);
+               if(this.map1==true){
+                this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);}
+                //haanresolve(true);
+                let marker = new google.maps.Marker({
                   map: this.map,
                   animation: google.maps.Animation.DROP,
-                  position: {lat:this.lat,lng :this.lng}
+                  position: latLng
               });
+ 
  
 
     //this.directionsDisplay.setMap(this.map);
-  }
+  });
+
+    
+   }
+   ngOnDestroy(){
+      navigator.geolocation.clearWatch(this.watchId);
+   }
+   submitAnswer(answer : string){
+     this.rest.submitAns(answer,this.level.level_no)
+     .subscribe((data:any)=>{
+                  if(data.success == true) {
+                    
+                      console.log('correct ans');
+                  }
+                  else{
+                   console.log('wrong');                  }
+                  console.log(data);
+              }
+              ,error=>{
+                console.log(error);
+              }
+    )
+   }
+  submitLocation(){
+   this.rest.submitLocation(this.level.level_no ,this.lat,this.lng)
+   .subscribe((data:any)=>{
+       if(data.success == true) {
+                      console.log('correct ans');
+                  }
+                  else{
+                   console.log('wrong');                  }
+                  console.log(data);
+              }
+              ,error=>{
+                console.log(error);
+              }
+    )
+   }
 
 }

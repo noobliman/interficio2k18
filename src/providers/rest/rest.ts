@@ -79,55 +79,38 @@ export class RestProvider {
 
   }
   getLevel(){
+      httpOptions = {
+                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+this.token})
 
+                  }
        return this.http.get(apiUrl+'api/getlevel/',httpOptions)
-    .subscribe((data:any)=>{
-        this.level = data;
-    }
-    ,error=>{
-      console.log(error);
-    });
     
   }
   submitAns (answer : string , level_no : number){
   
     return this.http.post(apiUrl+'api/submit/ans/',{answer,level_no}, httpOptions)
-    .subscribe(data=>{
-                  if(data == true) {
-                      //next level operations
-                  }
-                  else{
-                    //retry
-                  }
-                  console.log(data);
-              }
-              ,error=>{
-                console.log(error);
-              }
-    )
+    
     
 
   }
   submitLocation(level_no : number ,lat : number ,long :number ){
      return this.http.post(apiUrl+'api/submit/location/',{level_no,lat,long}, httpOptions)
-    .subscribe(data=>{
-                  if(data == true) {
-                      //next level operations
-                  }
-                  else{
-                    //retry
-                  }
-                  console.log(data);
-              }
-              ,error=>{
-                console.log(error);
-              }
-    )
+    
   
   }
   getPlayerDetail(){
       return    this.http.get(apiUrl+'api/player/',httpOptions)
      
+  }
+
+
+  getLeaderboard(){
+
+    var httpOptions1= {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+     return    this.http.get(apiUrl+'api/leaderboard/',httpOptions1);
+
   }
   
 }

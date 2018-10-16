@@ -13,6 +13,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<p ></p>
+<ion-content padding *ngIf="loaded==true">
+<p >{{player.user_name}}</p>
+<p>{{player.name}}</p>
+<p>{{player.score}}</p>
+<p>{{player.rank}}</p>
+<p>{{player.current_level}}</p>
 </ion-content>
