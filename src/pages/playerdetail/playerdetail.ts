@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {RestProvider} from '../../providers/rest/rest';
 import {Observable} from 'rxjs';
+import {Storage} from '@ionic/storage';
 //import * as global from '../../global'
 /**
  * Generated class for the PlayerdetailPage page.
@@ -19,7 +20,7 @@ export class PlayerdetailPage {
 	pages: Array<{title: string, component: any}>;
  	player : any;
   loaded = false;
-   constructor(public navCtrl: NavController, public navParams: NavParams,public rest : RestProvider) {
+   constructor(public navCtrl: NavController, public navParams: NavParams,public rest : RestProvider , public storage: Storage) {
  
   }
   ionViewCanEnter() {
@@ -33,7 +34,7 @@ export class PlayerdetailPage {
                   console.log(this.player);
                   this.loaded=true;
                   resolve(data);
-
+                  
               }
               ,error=>{
                 console.log(error);

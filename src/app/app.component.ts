@@ -11,6 +11,8 @@ import {QuestionPage} from '../pages/question/question';
 import {LeaderboardPage} from '../pages/leaderboard/leaderboard';
 import {PlayerdetailPage} from '../pages/playerdetail/playerdetail';
 import {LoginPage} from '../pages/login/login';
+import {RestProvider} from '../providers/rest/rest';
+import {Storage} from '@ionic/storage';
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,17 +21,24 @@ export class MyApp {
   @ViewChild('map') mapElement: ElementRef;
  
   //map: any;
-  rootPage: any = HomePage;
+  TOKEN : any ;
+  rootPage: any;
   loggedIn  = false;
+  menu: Array<{title: string, component: any}>;
   pages: Array<{title: string, component: any}>;
   notpages:Array<{title: string, component: any}>;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public events : Events,public menuCtrl:MenuController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public events : Events,public menuCtrl:MenuController, public rest : RestProvider,public storage : Storage) {
     this.initializeApp();
-    events.subscribe('user:loggedin',(username)=>{
-      this.openPage({title: 'Player detail', component: PlayerdetailPage});
-      console.log(username);
-      this.loggedIn= true;
-       if(this.loggedIn == true)
+    var TOKEN = localStorage.getItem('TOKEN');
+
+    this.menu  = TOKEN ? this.pages:this.notpages;
+     this.notpages = [
+      { title: 'Home', component: HomePage },
+   
+      {title: 'Instructions', component: RulesPage},
+      {title: 'Leaderboard', component : LeaderboardPage},
+      
+    ];
     this.pages = [
      
       {title: 'Player detail', component: PlayerdetailPage},
@@ -39,34 +48,27 @@ export class MyApp {
       {title: 'Leaderboard', component : LeaderboardPage},
       {title: 'Log Out' , component : HomePage}
     ];
+    
+    events.subscribe('user:loggedin',(username)=>{
+      this.menu = this.pages;
+      this.openPage({title: 'Player detail', component: PlayerdetailPage});
+      console.log(username);
+      
 
     });
     events.subscribe('user:loggedout',(username)=>{
       console.log(username);
-      this.loggedIn= false;
-       if(this.loggedIn == false)
-    this.pages = [
-     
-    { title: 'Home', component: HomePage },
-   
-      {title: 'Instructions', component: RulesPage},
-      {title: 'Leaderboard', component : LeaderboardPage},
-      
-    ];
+      this.menu = this.notpages;
+      localStorage.removeItem('TOKEN');
+
 
     });
 
+
     // used for an example of ngFor and navigation
     
-    if(this.loggedIn == false)
-    this.pages = [
-      { title: 'Home', component: HomePage },
+    //if(this.loggedIn == false)
    
-      {title: 'Instructions', component: RulesPage},
-      {title: 'Leaderboard', component : LeaderboardPage},
-      
-    ];
-    
 
   }
   //latitude : any ;
@@ -78,6 +80,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.TOKEN = localStorage.getItem('TOKEN');
+      console.log(this.TOKEN);
+      this.rootPage = this.TOKEN?PlayerdetailPage : HomePage;
     });
 
     

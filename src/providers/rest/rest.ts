@@ -12,7 +12,11 @@ import {Events} from 'ionic-angular'
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-var httpOptions = {
+var TOKEN = localStorage.getItem('TOKEN')
+var httpOptions = TOKEN?{
+                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+TOKEN})
+
+                  }:{
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
  class level {
@@ -22,26 +26,27 @@ var httpOptions = {
       map_bool: boolean ;
     }
 
-
+//const token = "";
 const apiUrl = "http://142.93.220.123:8888/";
 @Injectable()
 export class RestProvider {
 	level : level ;
-  token : string ;
   username : string;
   playerdetail : any;
   constructor(public http: HttpClient, private storage : Storage,public events : Events) {
     console.log('Hello RestProvider Provider');
+   // console.log(httpOptions);
   }
 
     addUser (userData : User){
     return this.http.post(apiUrl+'api/auth/register/',userData, httpOptions)
     .subscribe((data:any)=>{
-                  this.storage.set('Data',data);
-                  this.token = data.token; 
+                 localStorage.TOKEN = data.token;
+
+                  //this.token = data.token; 
                   this.username = data.user.username;
                   httpOptions = {
-                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token'+data.token})
+                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+data.token})
 
                   }
                   console.log(data);
@@ -61,8 +66,8 @@ export class RestProvider {
      }
     return this.http.post(apiUrl+'api/auth/login/',content, httpOptions)
     .subscribe((data:any)=>{
-                  this.storage.set('Data',data);
-                  this.token = data.token;
+                  localStorage.TOKEN = data.token ;
+                  //this.token = data.token;
                   //this.username = data.user.username;
                   httpOptions = {
                     headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+data.token})
@@ -79,10 +84,6 @@ export class RestProvider {
 
   }
   getLevel(){
-      httpOptions = {
-                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+this.token})
-
-                  }
        return this.http.get(apiUrl+'api/getlevel/',httpOptions)
     
   }
@@ -112,5 +113,6 @@ export class RestProvider {
      return    this.http.get(apiUrl+'api/leaderboard/',httpOptions1);
 
   }
+  
   
 }
