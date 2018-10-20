@@ -25,21 +25,14 @@ export class MyApp {
   rootPage: any;
   loggedIn  = false;
   menu: Array<{title: string, component: any}>;
-  pages: Array<{title: string, component: any}>;
-  notpages:Array<{title: string, component: any}>;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public events : Events,public menuCtrl:MenuController, public rest : RestProvider,public storage : Storage) {
-    this.initializeApp();
-    var TOKEN = localStorage.getItem('TOKEN');
-
-    this.menu  = TOKEN ? this.pages:this.notpages;
-     this.notpages = [
+  notpages = [
       { title: 'Home', component: HomePage },
    
       {title: 'Instructions', component: RulesPage},
       {title: 'Leaderboard', component : LeaderboardPage},
       
     ];
-    this.pages = [
+   pages = [
      
       {title: 'Player detail', component: PlayerdetailPage},
       
@@ -48,6 +41,12 @@ export class MyApp {
       {title: 'Leaderboard', component : LeaderboardPage},
       {title: 'Log Out' , component : HomePage}
     ];
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public events : Events,public menuCtrl:MenuController, public rest : RestProvider,public storage : Storage) {
+    this.initializeApp();
+    var TOKEN = localStorage.getItem('TOKEN');
+
+    this.menu  = TOKEN ? this.pages:this.notpages;
+     
     
     events.subscribe('user:loggedin',(username)=>{
       this.menu = this.pages;
@@ -80,6 +79,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      //localStorage.removeItem('TOKEN');
       this.TOKEN = localStorage.getItem('TOKEN');
       console.log(this.TOKEN);
       this.rootPage = this.TOKEN?PlayerdetailPage : HomePage;

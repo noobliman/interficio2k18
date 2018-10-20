@@ -12,13 +12,7 @@ import {Events} from 'ionic-angular'
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-var TOKEN = localStorage.getItem('TOKEN')
-var httpOptions = TOKEN?{
-                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+TOKEN})
 
-                  }:{
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
  class level {
       level_no: number ; 
       title : string ;
@@ -33,19 +27,29 @@ export class RestProvider {
 	level : level ;
   username : string;
   playerdetail : any;
+  httpOptions  :any;
+  TOKEN : any ;
   constructor(public http: HttpClient, private storage : Storage,public events : Events) {
     console.log('Hello RestProvider Provider');
+    this.TOKEN = localStorage.getItem('TOKEN');
+this.httpOptions = this.TOKEN?{
+
+                    headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+this.TOKEN})
+
+                  }:{
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
    // console.log(httpOptions);
   }
 
     addUser (userData : User){
-    return this.http.post(apiUrl+'api/auth/register/',userData, httpOptions)
+    return this.http.post(apiUrl+'api/auth/register/',userData, this.httpOptions)
     .subscribe((data:any)=>{
                  localStorage.TOKEN = data.token;
 
                   //this.token = data.token; 
                   this.username = data.user.username;
-                  httpOptions = {
+                  this.httpOptions = {
                     headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+data.token})
 
                   }
@@ -64,12 +68,12 @@ export class RestProvider {
          username : username,
          password : password
      }
-    return this.http.post(apiUrl+'api/auth/login/',content, httpOptions)
+    return this.http.post(apiUrl+'api/auth/login/',content, this.httpOptions)
     .subscribe((data:any)=>{
                   localStorage.TOKEN = data.token ;
                   //this.token = data.token;
                   //this.username = data.user.username;
-                  httpOptions = {
+                  this.httpOptions = {
                     headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+data.token})
 
                   }
@@ -84,23 +88,23 @@ export class RestProvider {
 
   }
   getLevel(){
-       return this.http.get(apiUrl+'api/getlevel/',httpOptions)
+       return this.http.get(apiUrl+'api/getlevel/',this.httpOptions)
     
   }
   submitAns (answer : string , level_no : number){
   
-    return this.http.post(apiUrl+'api/submit/ans/',{answer,level_no}, httpOptions)
+    return this.http.post(apiUrl+'api/submit/ans/',{answer,level_no}, this.httpOptions)
     
     
 
   }
   submitLocation(level_no : number ,lat : number ,long :number ){
-     return this.http.post(apiUrl+'api/submit/location/',{level_no,lat,long}, httpOptions)
+     return this.http.post(apiUrl+'api/submit/location/',{level_no,lat,long}, this.httpOptions)
     
   
   }
   getPlayerDetail(){
-      return    this.http.get(apiUrl+'api/player/',httpOptions)
+      return    this.http.get(apiUrl+'api/player/',this.httpOptions)
      
   }
 
