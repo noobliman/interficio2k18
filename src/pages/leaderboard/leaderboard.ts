@@ -15,14 +15,14 @@ import {RestProvider} from '../../providers/rest/rest';
   templateUrl: 'leaderboard.html',
 })
 export class LeaderboardPage {
-	standings : Array<object> ;
+	standings : Array<any> ;
 	loaded =false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public rest : RestProvider) {
   this.rest.getLeaderboard()
   		.subscribe((data:any)=>{
-  		this.standings = data.standings;
+  		this.standings = data;
   		this.loaded = true;
-
+      console.log(data);
   		console.log(this.standings); 
   	
   });

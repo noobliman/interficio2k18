@@ -5,7 +5,7 @@ import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {catchError,tap,map} from 'rxjs/operators';
 import {Storage} from '@ionic/storage';
 import {User} from '../user.model';
-import {Events} from 'ionic-angular'
+import {Events,AlertController} from 'ionic-angular'
 //import * as global from '../../global';
 /*
   Generated class for the RestProvider provider.
@@ -29,7 +29,7 @@ export class RestProvider {
   playerdetail : any;
   httpOptions  :any;
   TOKEN : any ;
-  constructor(public http: HttpClient, private storage : Storage,public events : Events) {
+  constructor(public http: HttpClient, private storage : Storage,public events : Events,public alertCtrl : AlertController) {
     console.log('Hello RestProvider Provider');
     this.TOKEN = localStorage.getItem('TOKEN');
 this.httpOptions = this.TOKEN?{
@@ -58,6 +58,14 @@ this.httpOptions = this.TOKEN?{
     
               }
               ,error=>{
+
+                let alert = this.alertCtrl.create({
+                    title : 'OOPS',
+                    subTitle : 'Invalid Details',
+                    buttons : ['Try Again'],
+                   cssClass:'alert-box'
+                });
+                alert.present();
                 console.log(error);
               }
     )
@@ -82,6 +90,13 @@ this.httpOptions = this.TOKEN?{
     
                  }
               ,error=>{
+                let alert = this.alertCtrl.create({
+                    title : 'Cannot Log In',
+                    subTitle : 'Check your username and password',
+                    buttons : ['Dismiss'],
+                   cssClass:'alert-box'
+                });
+                alert.present();
                 console.log(error);
               }
     )
@@ -114,7 +129,7 @@ this.httpOptions = this.TOKEN?{
     var httpOptions1= {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-     return    this.http.get(apiUrl+'api/leaderboard/',httpOptions1);
+     return    this.http.get(apiUrl+'api/scoreboard/',httpOptions1);
 
   }
   

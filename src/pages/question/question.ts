@@ -1,5 +1,5 @@
 import { Component ,Input,Renderer2,ElementRef,Inject,ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams ,ModalController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,ModalController,AlertController} from 'ionic-angular';
 import {LoginPage} from '../login/login';
 import {RulesPage} from '../rules/rules';
 import {LeaderboardPage} from '../leaderboard/leaderboard';
@@ -33,7 +33,7 @@ pages: Array<{title: string, component: any}>;
   marker : any;
   level : any;
   loaded = false;
-   constructor(public navCtrl: NavController, public navParams: NavParams,  public modalCtrl : ModalController,public renderer : Renderer2,public rest : RestProvider) {
+   constructor(public navCtrl: NavController, public navParams: NavParams,  public modalCtrl : ModalController,public renderer : Renderer2,public rest : RestProvider,public alertCtrl : AlertController) {
   	this.username = navParams.get('username');
   
   }
@@ -111,9 +111,31 @@ pages: Array<{title: string, component: any}>;
    this.rest.submitLocation(this.level.level_no ,this.lat,this.lng)
    .subscribe((data:any)=>{
        if(data.success == true) {
-                      console.log('correct ans');
+                      let alert = this.alertCtrl.create({
+                    title : 'Yasss',
+                    subTitle : 'Correct Answer',
+                    buttons : [{text : 'Next Level',
+                      handler: data=>{
+                          this.ionViewDidLoad();
+                      
+                          alert.dismiss();
+                          }
+                  }],
+                   cssClass:'correct'
+                });
+                alert.present();
+                console.log('correct ans');
                   }
                   else{
+                       let alert = this.alertCtrl.create({
+                    title : 'Yasss',
+                    subTitle : 'Correct Answer',
+                    buttons : ['Next Level'],
+                   cssClass:'correct',
+                    enableBackdropDismiss: false
+                });
+                alert.present();
+                //alert.dismiss();
                    console.log('wrong');                  }
                   console.log(data);
               }
