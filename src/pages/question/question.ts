@@ -117,7 +117,7 @@ pages: Array<{title: string, component: any}>;
                     buttons : [{text : 'Next Level',
                       handler: data=>{
                           this.ionViewDidLoad();
-                      
+                        this.navCtrl
                           alert.dismiss();
                           }
                   }],
