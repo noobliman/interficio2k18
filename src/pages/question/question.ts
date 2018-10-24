@@ -45,6 +45,7 @@ pages: Array<{title: string, component: any}>;
    .subscribe((data:any)=>{
      this.level=data;
      this.map1 = data.map_bool;
+     console.log(data);
      this.loaded = true;
      resolve(data);
    },error=>{

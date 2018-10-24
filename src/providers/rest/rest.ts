@@ -46,8 +46,8 @@ this.httpOptions = this.TOKEN?{
     return this.http.post(apiUrl+'api/auth/register/',userData, this.httpOptions)
     .subscribe((data:any)=>{
                  localStorage.TOKEN = data.token;
-
-                  //this.token = data.token; 
+                 console.log(this.TOKEN);
+                  this.TOKEN = data.token; 
                   this.username = data.user.username;
                   this.httpOptions = {
                     headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+data.token})
@@ -71,7 +71,7 @@ this.httpOptions = this.TOKEN?{
     return this.http.post(apiUrl+'api/auth/login/',content, this.httpOptions)
     .subscribe((data:any)=>{
                   localStorage.TOKEN = data.token ;
-                  //this.token = data.token;
+                  this.TOKEN = data.token;
                   //this.username = data.user.username;
                   this.httpOptions = {
                     headers : new HttpHeaders({'Content-Type': 'application/json','Authorization': 'Token '+data.token})
