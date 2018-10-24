@@ -4,10 +4,10 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header >
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
+  <ion-navbar transparent >
+    <ion-title><p class="title">Login</p></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,16 +17,13 @@
 <form>
 	<ion-list class="input">
        <ion-item>
-        <ion-label floating>Username</ion-label>
+        <ion-label floating><p class="title">Username</p></ion-label>
         <ion-input type="text" #username></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Password</ion-label>
+        <ion-label floating><p class="title">Password</p></ion-label>
         <ion-input type="Password" #password></ion-input>
       </ion-item >
-      <ion-item href="#" style="text-align: right">
-        <p>Forget Password?<a style="color: black">Get Here</a></p>
-      </ion-item>
       <button ion-button color="dark" (click)="login(username.value,password.value)">Login</button>
    
       </ion-list>

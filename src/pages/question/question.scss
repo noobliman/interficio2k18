@@ -1,8 +1,7 @@
 @charset "UTF-8";
 @import 'https://fonts.googleapis.com/css?family=Mountains+of+Christmas';
 page-question {
-#map {
-    height: 100%;}
+
 @keyframes animStar {
   from {
     transform: translateY(-2000px);
@@ -12,13 +11,15 @@ page-question {
   }
 }
 .background{
-	
-	background-image: url("https://hdqwalls.com/download/kratos-god-of-war-new-1280x2120.jpg");
+  
+  background-image: url("https://hdqwalls.com/download/kratos-god-of-war-new-1280x2120.jpg");
    background-size:cover;
-  	position :relative;
-  	text-align : center;
+   background-position : center;
+  
 
 }
+#map {
+    height: 100%;}
 h1{
 	position :relative;
 	text-align : center;

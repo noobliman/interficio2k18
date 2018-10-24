@@ -1,55 +1,50 @@
 page-leaderboard {
-.md-header {
-  color: rgba(0,0,0,0.54);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .01em;
-  line-height: 1.2em;
+.title{
+  color : #fff;
 }
-@font-face {
-  font-family: 'Game of Thrones';
-  src:  url('src/assets/skins/lightgray/fonts/got.ttf');
-}
-
-.md-list-item {
-  width: 100%
-}
- 
-.md-list-text {
-  width: 100%
-}
-td {
-font-size: 17px;
-padding: 15px;
-}
-th {
-  font-size: 15px;
-  text-align: center;
-}
-
-.data {
-    font-size: 17px;
-    text-align: center;
-}
-
-.tble{
-  font-family: 'Game of Thrones';
-}
-
 
 
 .background {
-background-color: #FAEBD7;
-background-size: 100vw 100vh;
-background-attachment: fixed;
-overflow: hidden;
+  background-image: url("https://fsb.zobj.net/crop.php?r=oFJpBpRt1Tn_BwLmZqFgRrSyn2nbuRUAx003tSN_lZyAAWBR3oxnqa3QoXxKrAHxYSfa30CgVwOO-daOWe1g5-zy4Zirplvp9tJzDB0GzRH7YwP5dbwfLF7jsG9Ou5mZiTIozaeF9d4U2K1J") ;
+   background-size:cover;
+   background-position : center;
 display: block;
 }
 
-.text-center{
-  font-family: 'Game of Thrones';
-  font-size: 15px;
+table{
+  width:100%;
+  table-layout: fixed;
+
 }
+.headrow{
+  background-color: rgba(255,255,255,0.8);
+  color : #000000 !important;
+   //border: 5px solid white;
+   //border-radius: 10px;
+ }
+ .headelement{
+  color: #000;
+  //border: 1px solid white;
+ }
+.thread{
+  height:100vw;
+  background-color: rgba(13, 12, 12,0.7);
+  overflow-x:auto;
+  margin-top: 0px;
+  //border-radius: 10px;
+  //border: 1px solid rgba(255,255,255,0.3);
+}
+
+ion-col{
+  padding: 5vw;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 5vw;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
 
 .gnu {
   font-family: 'Game of Thrones';
