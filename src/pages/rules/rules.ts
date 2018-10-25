@@ -15,6 +15,7 @@ export class RulesPage {
   users : any;
 
   constructor( public navCtrl: NavController, public navParams: NavParams,public restApi : RestProvider,public loadingController:LoadingController ) {
+  
   }
 
 ngOnInit(){

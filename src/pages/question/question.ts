@@ -35,7 +35,7 @@ pages: Array<{title: string, component: any}>;
   loaded = false;
    constructor(public navCtrl: NavController, public navParams: NavParams,  public modalCtrl : ModalController,public renderer : Renderer2,public rest : RestProvider,public alertCtrl : AlertController) {
   	this.username = navParams.get('username');
-  
+    
   }
   ionViewCanEnter() {
     console.log("in ionViewCanEnter")
@@ -115,9 +115,13 @@ pages: Array<{title: string, component: any}>;
                     title : 'Yasss',
                     subTitle : 'Correct Answer',
                     buttons : [{text : 'Next Level',
-                      handler: data=>{
-                          this.ionViewDidLoad();
-                        this.navCtrl
+                      handler: temp=>{
+                       
+                        window.location.reload();
+
+
+
+                        //this.navCtrl
                           alert.dismiss();
                           }
                   }],
@@ -130,7 +134,16 @@ pages: Array<{title: string, component: any}>;
                        let alert = this.alertCtrl.create({
                     title : 'Yasss',
                     subTitle : 'Correct Answer',
-                    buttons : ['Next Level'],
+                    buttons : [{text : 'Next Level',
+                      handler: temp=>{
+                          window.location.reload();
+
+
+
+                        //this.navCtrl
+                          alert.dismiss();
+                          }
+                  }],
                    cssClass:'correct',
                     enableBackdropDismiss: false
                 });
