@@ -134,16 +134,8 @@ pages: Array<{title: string, component: any}>;
                        let alert = this.alertCtrl.create({
                     title : 'OOPPPS',
                     subTitle : 'Wrong Answer',
-                    buttons : [{text : 'Try Again',
-                      handler: temp=>{
-                          //window.location.reload();
-
-
-
-                        //this.navCtrl
-                          alert.dismiss();
-                          }
-                  }],
+                    buttons : ['try again'],
+                     
                    cssClass:'wrong',
                     enableBackdropDismiss: false
                 });
