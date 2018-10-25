@@ -33,7 +33,7 @@ pages: Array<{title: string, component: any}>;
   marker : any;
   level : any;
   loaded = false;
-   constructor(public navCtrl: NavController, public navParams: NavParams,  public modalCtrl : ModalController,public renderer : Renderer2,public rest : RestProvider,public alertCtrl : AlertController) {
+   constructor(public navCtrl: NavController, public navParams: NavParams,public renderer : Renderer2,public rest : RestProvider,public alertCtrl : AlertController) {
   	this.username = navParams.get('username');
     
   }
@@ -95,10 +95,36 @@ pages: Array<{title: string, component: any}>;
      this.rest.submitAns(answer,this.level.level_no)
      .subscribe((data:any)=>{
                   if(data.success == true) {
-                    
+                     let alert = this.alertCtrl.create({
+                    title : 'Yasss',
+                    subTitle : 'Correct Answer',
+                    buttons : [{text : 'Next Level',
+                      handler: temp=>{
+                       
+                        window.location.reload();
+
+
+
+                        //this.navCtrl
+                          alert.dismiss();
+                          }
+                  }],
+                   cssClass:'correct'
+                });
+                alert.present();
                       console.log('correct ans');
                   }
                   else{
+                    let alert = this.alertCtrl.create({
+                    title : 'OOPPPS',
+                    subTitle : 'Wrong Answer',
+                    buttons : ['try again'],
+                     
+                   cssClass:'wrong',
+                    enableBackdropDismiss: false
+                });
+                alert.present();
+                
                    console.log('wrong');                  }
                   console.log(data);
               }
