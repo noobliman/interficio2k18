@@ -21,7 +21,7 @@ import {Events,AlertController} from 'ionic-angular'
     }
 
 //const token = "";
-const apiUrl = "http://142.93.220.123:8888/";
+const apiUrl = "https://interback.nitdgplug.org/";
 @Injectable()
 export class RestProvider {
 	level : level ;
