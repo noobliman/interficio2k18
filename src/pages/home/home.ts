@@ -16,7 +16,7 @@ export class HomePage {
 
 	 bool = false ;
   constructor(public navCtrl: NavController , public modalCtrl : ModalController,public events : Events,public rest : RestProvider) {
-
+    //localStorage.PresentPage = HomePage;
   }
   openLogin(){
   	let modal = this.modalCtrl.create(LoginPage,{},{showBackdrop:true, enableBackdropDismiss:true,cssClass : 'modal'});

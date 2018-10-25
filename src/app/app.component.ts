@@ -82,7 +82,9 @@ export class MyApp {
       //localStorage.removeItem('TOKEN');
       this.TOKEN = localStorage.getItem('TOKEN');
       console.log(this.TOKEN);
-      this.rootPage = this.TOKEN?PlayerdetailPage : HomePage;
+      //localStorage.removeItem('PresentPage');
+      this.rootPage = localStorage.getItem('PresentPage');
+      this.rootPage = this.TOKEN?PlayerdetailPage:HomePage;
     });
 
     
@@ -93,9 +95,12 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if(page.component!=HomePage)
-    this.nav.setRoot(page.component);
+    {this.nav.setRoot(page.component);
+     localStorage.PresentPage = page.component;
+     }
     else{
       this.events.publish('user:loggedout','logout');
+      localStorage.PresentPage = page.component;
       this.nav.setRoot(page.component);
     }
 

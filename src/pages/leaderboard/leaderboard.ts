@@ -18,6 +18,7 @@ export class LeaderboardPage {
 	standings : Array<any> ;
 	loaded =false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public rest : RestProvider) {
+    //localStorage.PresentPage = LeaderboardPage;
   this.rest.getLeaderboard()
   		.subscribe((data:any)=>{
   		this.standings = data;
