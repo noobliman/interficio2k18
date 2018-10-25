@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LeaderboardPage } from './leaderboard';
+//import { LeaderboardPage } from './leaderboard';
 
 @NgModule({
   declarations: [
-    LeaderboardPage,
+  //  LeaderboardPage,
   ],
   imports: [
-    IonicPageModule.forChild(LeaderboardPage),
+    //IonicPageModule.forChild(LeaderboardPage),
   ],
 })
 export class LeaderboardPageModule {}

@@ -9,11 +9,11 @@ import {RulesPage} from '../pages/rules/rules';
 import {LoginPage} from '../pages/login/login';
 import {LeaderboardPage} from '../pages/leaderboard/leaderboard';
 import {RegisterPage} from '../pages/register/register';
-import {MapComponent} from '../components/map/map';
-import {RegisterComponent} from '../components/register/register';
+//import {MapComponent} from '../components/map/map';
+//import {RegisterComponent} from '../components/register/register';
 import  {QuestionPage} from '../pages/question/question';
 import {PlayerdetailPage} from '../pages/playerdetail/playerdetail';
-import {ComponentsModule} from '../components/components.module'
+//import {ComponentsModule} from '../components/components.module'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {RestProvider} from '../providers/rest/rest';
@@ -29,9 +29,9 @@ import { IonicStorageModule } from '@ionic/storage';
     LoginPage,
     LeaderboardPage,
     RegisterPage,
-    MapComponent,
+    //MapComponent,
     PlayerdetailPage,
-    RegisterComponent
+    //RegisterComponent
     
   ],
   imports: [

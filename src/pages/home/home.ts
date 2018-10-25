@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController,ModalController,Events } from 'ionic-angular';
 import {RestProvider} from '../../providers/rest/rest';
 import {RegisterPage} from '../register/register';
-import {RegisterComponent} from '../../components/register/register';
+//import {RegisterComponent} from '../../components/register/register';
 import {MyApp} from '../../app/app.component'
 import {QuestionPage} from '../question/question';
 import {PlayerdetailPage} from '../playerdetail/playerdetail';

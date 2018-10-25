@@ -6,7 +6,7 @@ import {LeaderboardPage} from '../leaderboard/leaderboard';
 import {MyApp} from '../../app/app.component';
 import {DOCUMENT} from '@angular/platform-browser';
 import {Plugins} from '@capacitor/core';
-import {MapComponent} from '../../components/map/map'
+//import //{MapComponent} from '../../components/map/map'
 import {RestProvider} from '../../providers/rest/rest';
 
 /**
@@ -132,11 +132,11 @@ pages: Array<{title: string, component: any}>;
                   }
                   else{
                        let alert = this.alertCtrl.create({
-                    title : 'Yasss',
-                    subTitle : 'Correct Answer',
-                    buttons : [{text : 'Next Level',
+                    title : 'OOPPPS',
+                    subTitle : 'Wrong Answer',
+                    buttons : [{text : 'Try Again',
                       handler: temp=>{
-                          window.location.reload();
+                          //window.location.reload();
 
 
 
@@ -144,7 +144,7 @@ pages: Array<{title: string, component: any}>;
                           alert.dismiss();
                           }
                   }],
-                   cssClass:'correct',
+                   cssClass:'wrong',
                     enableBackdropDismiss: false
                 });
                 alert.present();

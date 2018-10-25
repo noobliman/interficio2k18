@@ -1,6 +1,6 @@
 import { Component ,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams ,Events,Nav} from 'ionic-angular';
-import {RegisterComponent} from '../../components/register/register';
+//import {RegisterComponent} from '../../components/register/register';
 import {MyApp} from '../../app/app.component'
 import {QuestionPage} from '../question/question';
 import {PlayerdetailPage} from '../playerdetail/playerdetail';
